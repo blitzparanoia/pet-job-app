@@ -24,6 +24,21 @@ class JobsController < ApplicationController
     end
   end
 
+  def edit
+    @job = Job.find_by(id: params[:id])
+   if !@job
+     redirect_to jobs_path
+   end
+  end
+
+  def destroy
+    @job = Job.find_by(id: params[:id])
+   if !@job
+     redirect_to jobs_path
+   end
+   @job.destroy
+   redirect_to jobs_path
+  end
 
 
   private
