@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
 
   def index
+    @jobs = Job.all
   end
 
   def new
@@ -8,12 +9,18 @@ class JobsController < ApplicationController
   end
 
   def create
-    @job = Job.new
+    @job = Job.new(job_params)
     if @job.save
       redirect_to jobs_path
     else
       render :new
     end
+  end
+
+  private
+
+  def job_params
+    params.reqire(:job).permit(:title, :position, :description)
   end
 
 
