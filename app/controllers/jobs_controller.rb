@@ -11,16 +11,25 @@ class JobsController < ApplicationController
   def create
     @job = Job.new(job_params)
     if @job.save
-      redirect_to jobs_path
+      redirect_to job_path(@job)
     else
       render :new
     end
   end
 
+  def show
+    @job = Job.find_by(id: params[:id])
+    if !@job
+      redirect_to jobs_path
+    end
+  end
+
+
+
   private
 
   def job_params
-    params.reqire(:job).permit(:title, :position, :description)
+    params.require(:job).permit(:title, :position, :description)
   end
 
 

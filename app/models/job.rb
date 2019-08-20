@@ -3,5 +3,8 @@ class Job < ApplicationRecord
   validates :position, presence: true
   validates :description, presence: true
 
-  #add company via asscoiation 
+  belongs_to :user
+  belongs_to :company
+
+  #add company via asscoiation
 end
